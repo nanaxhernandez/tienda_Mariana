@@ -80,12 +80,51 @@
                 </div>
             </div>
         </section>
+        
+        <section th:fragment="tarjetasAmpliada" class="container py-4">
+
+            <h4 class="mb-3">Resultados de la Consulta Ampliada</h4>
+
+            <p><strong>Total:</strong> <span th:text="${total}">0</span></p>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+
+                <div th:each="p : ${resultado}" class="col">
+                    <div class="card h-100 shadow-sm">
+
+                        <div class="d-flex justify-content-center align-items-center bg-light p-3" style="height: 200px;">
+                            <img th:src="${p.rutaImagen}" class="img-fluid" th:alt="${p.descripcion}" style="max-height: 100%; object-fit: contain;"/>
+                        </div>
+
+                        <div class="card-header bg-white">
+                            <h5 class="card-title text-center text-truncate mb-0" th:text="${p.descripcion}">Título</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <p class="card-text text-muted" th:text="${p.detalle}"></p>
+                        </div>
+
+                        <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-success" th:text="${#numbers.formatCurrency(p.precio)}"></span>
+                            <span th:if="${p.existencias > 0}" class="badge text-bg-success" th:text="${p.existencias} + ' unidades'"></span>
+                            <span th:unless="${p.existencias > 0}" class="badge text-bg-danger">Agotado</span>
+                        </div>
+
+                    </div>
+                </div>
+
+        <div th:if="${#lists.isEmpty(resultado)}" class="text-center text-muted">
+            No hay resultados con los filtros.
+        </div>
+    </div>
+
+</section>
 
         <section th:fragment='consultas' class='row row-cols-4 p-2'>
             <div th:replace="~{consultas/fragmentos :: formConsulta('primary',#{consultas.derivadas},'/consultas/consultaDerivada')}"/>
             <div th:replace="~{consultas/fragmentos :: formConsulta('warning',#{consultas.jpql},'/consultas/consultaJPQL')}"/>
             <div th:replace="~{consultas/fragmentos :: formConsulta('success',#{consultas.sql},'/consultas/consultaSQL')}"/>
-            <div class='card'><p class="p-3">Práctica #2</p></div>
+            <div th:replace="~{consultas/fragmentos :: formConsulta('info','Consulta Ampliada','/consultas/ampliada')}"></div>
         </section>
 
         <div th:fragment="formConsulta(colorForm, textoForm, urlForm)">
