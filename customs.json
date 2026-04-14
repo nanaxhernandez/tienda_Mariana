@@ -1,8 +1,22 @@
 {
     "elements": {},
     "attributes": {
+        "th:text": {},
+        "th:unless": {},
+        "th:src": {
+            "context": "script"
+        },
+        "th:replace": {
+            "context": "header"
+        },
         "th:href": {
             "context": "link"
+        },
+        "th:fragment": {
+            "context": "section"
+        },
+        "th:each": {
+            "context": "li"
         }
     }
 }
