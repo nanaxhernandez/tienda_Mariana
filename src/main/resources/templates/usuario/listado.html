@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html>
     <head th:fragment="head">
         <title>TechShop</title>
         <meta charset="UTF-8"/>
@@ -15,13 +13,14 @@
         <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
         <script th:src="@{/js/rutinas.js}"></script>
-    </head>      
-    <body>
-        <header th:replace="~{general/fragmentos :: header}"/>        
+    </head>   
 
-        <section th:replace="~{categoria/fragmentos :: agregar}"/> 
-        <section th:replace="~{categoria/fragmentos :: listado}"/>
-        <section th:replace="~{categoria/fragmentos :: confirmarEliminar}"/>
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"/>
+
+        <section th:replace="~{usuario/fragmentos :: agregar}"/>
+        <section th:replace="~{usuario/fragmentos :: listado}"/>
+        <section th:replace="~{usuario/fragmentos :: confirmarEliminar}"/>
         <section th:replace="~{general/fragmentos :: mostrarToast}"/>
 
         <footer th:replace="~{general/fragmentos :: footer}"/>
