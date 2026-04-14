@@ -8,27 +8,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-public class IndexController {
-    
-    // Las últimas versiones de Spring, recomiendan utilziar final y contructor en lugar de @autowired
+public class IntexController {
+
     private final ProductoService productoService;
     private final CategoriaService categoriaService;
-    
-    // (Spring inyecta automáticamente)
-    public IndexController(ProductoService productoService, CategoriaService categoriaService) {
+
+    public IntexController(ProductoService productoService, CategoriaService categoriaService) {
         this.productoService = productoService;
         this.categoriaService = categoriaService;
     }
-    
+
     @GetMapping("/")
-    public String cargarPaginaInicio(Model model) {
-        var lista = productoService.getProductos(true);
-        model.addAttribute("productos", lista);
+    public String listado(Model model) {
+        var productos = productoService.getProductos(false);
+        model.addAttribute("productos", productos);
         var categorias = categoriaService.getCategorias(true);
         model.addAttribute("categorias", categorias);
         return "/index";
     }
-    
+
     @GetMapping("/consultas/{idCategoria}")
     public String listado(@PathVariable("idCategoria") Integer idCategoria, Model model) {
         model.addAttribute("idCategoriaActual", idCategoria);
@@ -45,4 +43,5 @@ public class IndexController {
         model.addAttribute("categorias", categorias);
         return "/index";
     }
+
 }
